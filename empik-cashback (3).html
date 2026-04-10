@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stawki cashbacku LetyShops za zamówienia w Empik</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+    header {
+      background: #2c2c2c;
+      border-bottom: none;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -2px;
+      font-style: italic;
+      font-family: 'Georgia', serif;
+      line-height: 1;
+    }
+    .logo-dot { color: #fdbd13; }
+    h1 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      border-left: 2px solid #555;
+      padding-left: 18px;
+    }
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .lang-btn {
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #555;
+      background: transparent;
+      font-weight: 600;
+      color: #ccc;
+      transition: all .2s;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: #fdbd13;
+      color: #1a1a1a;
+      border-color: #fdbd13;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+    .search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 1rem;
+    }
+    #search {
+      width: 100%;
+      padding: 12px 16px 12px 40px;
+      font-size: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      transition: border .2s;
+      background: #fff;
+    }
+    #search:focus { border-color: #fdbd13; }
+    .stats {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .stats span { color: #c99000; font-weight: 700; }
+    .table-wrap {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      background: #fdbd13;
+      color: #1a1a1a;
+      padding: 13px 16px;
+      text-align: left;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    thead th:last-child { text-align: center; width: 130px; }
+    tbody tr {
+      border-bottom: 1px solid #f0f0f0;
+      transition: background .15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fffbee; }
+    td {
+      padding: 11px 16px;
+      font-size: 0.92rem;
+      vertical-align: middle;
+    }
+    td:last-child {
+      text-align: center;
+      font-weight: 700;
+    }
+    .rate-badge {
+      display: inline-block;
+      background: #fdbd13;
+      color: #1a1a1a;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.88rem;
+      min-width: 54px;
+    }
+    .rate-badge.zero {
+      background: #ccc;
+    }
+    .cat-label {
+      display: inline-block;
+      background: #fef8e0;
+      color: #c99000;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .sub-text {
+      color: #555;
+      font-size: 0.88rem;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #aaa;
+      font-size: 1rem;
+      display: none;
+    }
+    @media (max-width: 600px) {
+      header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      h1 { border-left: none; padding-left: 0; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <img src="data:image/png;base64,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" alt="empik" style="height:38px;">
+    <h1 id="page-title">Stawki cashbacku LetyShops za zamówienia w Empik</h1>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+    |
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Szukaj kategorii..." oninput="renderTable()">
+  </div>
+  <div class="note" id="note"></div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th id="th-cat">Kategoria</th>
+          <th id="th-sub">Podkategoria</th>
+          <th id="th-rate">Stawka cashback</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="no-results" id="no-results">Brak wyników dla podanej frazy.</div>
+  </div>
+</div>
+
+<script>
+const DATA = [{"category": "Audiobooki i ebooki", "subcategory": "", "rate": "6,25%", "rate_num": 0.0625}, {"category": "Prasa", "subcategory": "Kolekcje > Albumy i zestawy startowe", "rate": "3,26%", "rate_num": 0.0326}, {"category": "Prasa", "subcategory": "Kolekcje > Puszki i pudelka", "rate": "3,02%", "rate_num": 0.0302}, {"category": "Ksiazki obcojezyczne", "subcategory": "Books > Non-Fiction", "rate": "3,00%", "rate_num": 0.03}, {"category": "Ksiazki obcojezyczne", "subcategory": "Books > Literature, Fiction", "rate": "2,93%", "rate_num": 0.0293}, {"category": "Ksiazki obcojezyczne", "subcategory": "Books > Children's Books", "rate": "2,92%", "rate_num": 0.0292}, {"category": "Muzyka", "subcategory": "Vinyle > Pop & Rock", "rate": "2,91%", "rate_num": 0.0291}, {"category": "Ksiazki obcojezyczne", "subcategory": "", "rate": "2,83%", "rate_num": 0.0283}, {"category": "Muzyka", "subcategory": "Ciezkie brzmienia > Zagraniczna", "rate": "2,67%", "rate_num": 0.0267}, {"category": "Muzyka", "subcategory": "Rap & Hip Hop > Polska", "rate": "2,66%", "rate_num": 0.0266}, {"category": "Szkolne i papiernicze", "subcategory": "Art & Crafts > Rekodzielo", "rate": "2,64%", "rate_num": 0.0264}, {"category": "Muzyka", "subcategory": "Pop & Rock > Zagraniczna", "rate": "2,61%", "rate_num": 0.0261}, {"category": "Szkolne i papiernicze", "subcategory": "Art & Crafts > Dla dzieci", "rate": "2,60%", "rate_num": 0.026}, {"category": "Szkolne i papiernicze", "subcategory": "Kalendarze > Ksiazkowe", "rate": "2,56%", "rate_num": 0.0256}, {"category": "Szkolne i papiernicze", "subcategory": "Kalendarze > Scienne", "rate": "2,54%", "rate_num": 0.0254}, {"category": "Prasa", "subcategory": "", "rate": "2,53%", "rate_num": 0.0253}, {"category": "Ksiazki obcojezyczne", "subcategory": "Books > Humanities", "rate": "2,51%", "rate_num": 0.0251}, {"category": "Szkolne i papiernicze", "subcategory": "Art & Crafts > Materialy i surowce", "rate": "2,47%", "rate_num": 0.0247}, {"category": "Muzyka", "subcategory": "", "rate": "2,45%", "rate_num": 0.0245}, {"category": "Dom i ogród", "subcategory": "Dekoracje domu > Albumy na zdjecia", "rate": "2,42%", "rate_num": 0.0242}, {"category": "Ksiazki", "subcategory": "Biografie > Biografie i autobiografie", "rate": "2,41%", "rate_num": 0.0241}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly plastyczne > Malowanie", "rate": "2,40%", "rate_num": 0.024}, {"category": "Ksiazki", "subcategory": "Literatura faktu, reportaz > Literatura faktu", "rate": "2,40%", "rate_num": 0.024}, {"category": "Zabawki", "subcategory": "Lalki > Mini lalki i zwierzaki", "rate": "2,40%", "rate_num": 0.024}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly szkolno-biurowe > Archiwizacja", "rate": "2,40%", "rate_num": 0.024}, {"category": "Ksiazki", "subcategory": "Literatura obyczajowa > Literatura obyczajowa", "rate": "2,37%", "rate_num": 0.0237}, {"category": "Ksiazki", "subcategory": "Rozwój osobisty > Psychologia, motywacja", "rate": "2,36%", "rate_num": 0.0236}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly plastyczne > Rzezba i modelowanie", "rate": "2,36%", "rate_num": 0.0236}, {"category": "Szkolne i papiernicze", "subcategory": "", "rate": "2,35%", "rate_num": 0.0235}, {"category": "Ksiazki", "subcategory": "Fantastyka, horror > Fantasy", "rate": "2,34%", "rate_num": 0.0234}, {"category": "Ksiazki", "subcategory": "Kryminal, sensacja, thriller", "rate": "2,33%", "rate_num": 0.0233}, {"category": "Ksiazki", "subcategory": "Literatura piekna obca", "rate": "2,33%", "rate_num": 0.0233}, {"category": "Ksiazki", "subcategory": "Literatura faktu, reportaz > Reportaz", "rate": "2,32%", "rate_num": 0.0232}, {"category": "Ksiazki", "subcategory": "Dla dzieci > Wiek 9-12", "rate": "2,31%", "rate_num": 0.0231}, {"category": "Ksiazki", "subcategory": "Dla mlodziezy > Literatura dla mlodziezy", "rate": "2,31%", "rate_num": 0.0231}, {"category": "Zabawki", "subcategory": "Lalki > Celebrytki", "rate": "2,31%", "rate_num": 0.0231}, {"category": "Ksiazki", "subcategory": "Nauki spoleczne i humanistyczne > Psychologia", "rate": "2,31%", "rate_num": 0.0231}, {"category": "Ksiazki", "subcategory": "", "rate": "2,30%", "rate_num": 0.023}, {"category": "Ksiazki", "subcategory": "Sztuka > Inne", "rate": "2,29%", "rate_num": 0.0229}, {"category": "Szkolne i papiernicze", "subcategory": "Art & Crafts > Artykuly kreatywne", "rate": "2,29%", "rate_num": 0.0229}, {"category": "Zabawki", "subcategory": "Gry > Strategiczne i ekonomiczne", "rate": "2,28%", "rate_num": 0.0228}, {"category": "Zabawki", "subcategory": "Nauka i rozwój > Maly naukowiec", "rate": "2,26%", "rate_num": 0.0226}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly szkolno-biurowe > Zeszyty i bruliony", "rate": "2,23%", "rate_num": 0.0223}, {"category": "Ksiazki", "subcategory": "Nauki scisle, medycyna > Technika, inzynieria, technologia", "rate": "2,21%", "rate_num": 0.0221}, {"category": "Ksiazki", "subcategory": "Literatura obyczajowa > Romans", "rate": "2,20%", "rate_num": 0.022}, {"category": "Sport", "subcategory": "Turystyka > Kemping", "rate": "2,20%", "rate_num": 0.022}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly plastyczne > Rysowanie", "rate": "2,19%", "rate_num": 0.0219}, {"category": "Muzyka", "subcategory": "Jazz/Blues > Jazz", "rate": "2,17%", "rate_num": 0.0217}, {"category": "Zabawki", "subcategory": "Gry > Towarzyskie", "rate": "2,16%", "rate_num": 0.0216}, {"category": "Przyjecia i okazje", "subcategory": "Stroje i przebrania > Dla doroslych", "rate": "2,12%", "rate_num": 0.0212}, {"category": "Prasa", "subcategory": "Kolekcje > Naklejki i karty", "rate": "2,10%", "rate_num": 0.021}, {"category": "Zabawki", "subcategory": "Gry > Planszowe", "rate": "2,07%", "rate_num": 0.0207}, {"category": "Ksiazki", "subcategory": "Biznes, ekonomia, marketing > Ekonomia", "rate": "2,04%", "rate_num": 0.0204}, {"category": "Zabawki", "subcategory": "Gry > Lamiglowki", "rate": "2,04%", "rate_num": 0.0204}, {"category": "Szkolne i papiernicze", "subcategory": "Kalendarze > Biurkowe", "rate": "2,03%", "rate_num": 0.0203}, {"category": "Dom i ogród", "subcategory": "Tekstylia > Tekstylia do sypialni", "rate": "2,02%", "rate_num": 0.0202}, {"category": "Muzyka", "subcategory": "Pop & Rock > Skladanki", "rate": "2,01%", "rate_num": 0.0201}, {"category": "Zabawki", "subcategory": "Lalki > Akcesoria i domki dla lalek", "rate": "2,00%", "rate_num": 0.02}, {"category": "Ksiazki", "subcategory": "Dla dzieci > Wiek 0-2", "rate": "1,97%", "rate_num": 0.0197}, {"category": "Sport", "subcategory": "Torby i plecaki sportowe > Torby", "rate": "1,97%", "rate_num": 0.0197}, {"category": "Ksiazki", "subcategory": "Sport i wypoczynek > Fitness", "rate": "1,96%", "rate_num": 0.0196}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly szkolno-biurowe > Pisanie", "rate": "1,96%", "rate_num": 0.0196}, {"category": "Przyjecia i okazje", "subcategory": "Stroje i przebrania > Dla dzieci", "rate": "1,94%", "rate_num": 0.0194}, {"category": "Zabawki", "subcategory": "Gry > Przygodowe", "rate": "1,94%", "rate_num": 0.0194}, {"category": "Zabawki", "subcategory": "Gry > Logiczne", "rate": "1,93%", "rate_num": 0.0193}, {"category": "Muzyka", "subcategory": "Alternatywna > Polska", "rate": "1,92%", "rate_num": 0.0192}, {"category": "Ksiazki", "subcategory": "Nauki spoleczne i humanistyczne > Filozofia", "rate": "1,90%", "rate_num": 0.019}, {"category": "Ksiazki", "subcategory": "Biznes, ekonomia, marketing > Finanse, ksiegowosc, bankowosc", "rate": "1,88%", "rate_num": 0.0188}, {"category": "Ksiazki", "subcategory": "Poradniki > Inne", "rate": "1,88%", "rate_num": 0.0188}, {"category": "Ksiazki", "subcategory": "Young adult", "rate": "1,88%", "rate_num": 0.0188}, {"category": "Prasa", "subcategory": "Dla dzieci > Ogólnotematyczne", "rate": "1,86%", "rate_num": 0.0186}, {"category": "Przyjecia i okazje", "subcategory": "", "rate": "1,84%", "rate_num": 0.0184}, {"category": "Ksiazki", "subcategory": "Komiks > Manga", "rate": "1,83%", "rate_num": 0.0183}, {"category": "Przyjecia i okazje", "subcategory": "Stroje i przebrania > Dodatki do strojów", "rate": "1,82%", "rate_num": 0.0182}, {"category": "Zabawki", "subcategory": "Figurki > Figurki kolekcjonerskie", "rate": "1,81%", "rate_num": 0.0181}, {"category": "Sport", "subcategory": "Silownia i fitness > Medycyna sportowa", "rate": "1,78%", "rate_num": 0.0178}, {"category": "Ksiazki", "subcategory": "Nauki spoleczne i humanistyczne > Socjologia", "rate": "1,78%", "rate_num": 0.0178}, {"category": "Ksiazki", "subcategory": "Dla dzieci > Wiek 6-8", "rate": "1,77%", "rate_num": 0.0177}, {"category": "Muzyka", "subcategory": "Pop & Rock > Polska", "rate": "1,77%", "rate_num": 0.0177}, {"category": "Sport", "subcategory": "Sporty zimowe > Odziez zimowa", "rate": "1,77%", "rate_num": 0.0177}, {"category": "Filmy", "subcategory": "Filmy DVD > Kino polskie", "rate": "1,76%", "rate_num": 0.0176}, {"category": "Dom i ogród", "subcategory": "Tekstylia > Tekstylia domowe", "rate": "1,75%", "rate_num": 0.0175}, {"category": "Dom i ogród", "subcategory": "Meble > Materace", "rate": "1,74%", "rate_num": 0.0174}, {"category": "Dom i ogród", "subcategory": "Wyposazenie kuchni i jadalni > Naczynia do napojów", "rate": "1,72%", "rate_num": 0.0172}, {"category": "Sport", "subcategory": "Torby i plecaki sportowe > Plecaki i worki sportowe", "rate": "1,72%", "rate_num": 0.0172}, {"category": "Filmy", "subcategory": "Filmy DVD > Seriale", "rate": "1,71%", "rate_num": 0.0171}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly szkolno-biurowe > Akcesoria szkolne i biurowe", "rate": "1,67%", "rate_num": 0.0167}, {"category": "Ksiazki", "subcategory": "Nauki scisle, medycyna > Medycyna", "rate": "1,67%", "rate_num": 0.0167}, {"category": "Zabawki", "subcategory": "Gry > Rodzinne", "rate": "1,67%", "rate_num": 0.0167}, {"category": "Zabawki", "subcategory": "Nauka i rozwój > Zabawki interaktywne", "rate": "1,66%", "rate_num": 0.0166}, {"category": "Dom i ogród", "subcategory": "Oswietlenie > Lampy", "rate": "1,64%", "rate_num": 0.0164}, {"category": "Zabawki", "subcategory": "Gry > Edukacyjne", "rate": "1,64%", "rate_num": 0.0164}, {"category": "Ksiazki", "subcategory": "Dla dzieci > Wiek 3-5", "rate": "1,62%", "rate_num": 0.0162}, {"category": "Motoryzacja", "subcategory": "Elektronika dla zmotoryzowanych > Alkomaty i ustniki dla kierowców", "rate": "1,58%", "rate_num": 0.0158}, {"category": "Sport", "subcategory": "", "rate": "1,56%", "rate_num": 0.0156}, {"category": "Zabawki", "subcategory": "", "rate": "1,56%", "rate_num": 0.0156}, {"category": "Dom i ogród", "subcategory": "Meble > Meble biurowe", "rate": "1,54%", "rate_num": 0.0154}, {"category": "Zabawki", "subcategory": "Figurki > Figurki akcji", "rate": "1,53%", "rate_num": 0.0153}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Odziez i obuwie", "rate": "1,52%", "rate_num": 0.0152}, {"category": "Filmy", "subcategory": "Filmy Blu-ray > Filmy Blu-ray 2d", "rate": "1,52%", "rate_num": 0.0152}, {"category": "Motoryzacja", "subcategory": "Elektronika dla zmotoryzowanych > Wideorejestratory", "rate": "1,51%", "rate_num": 0.0151}, {"category": "Ksiazki", "subcategory": "Podreczniki szkolne, edukacja > Przedmioty zawodowe", "rate": "1,49%", "rate_num": 0.0149}, {"category": "Zabawki", "subcategory": "Pluszaki > Interaktywne", "rate": "1,48%", "rate_num": 0.0148}, {"category": "Zabawki", "subcategory": "Puzzle > Puzzle 3D i 4D", "rate": "1,46%", "rate_num": 0.0146}, {"category": "Dom i ogród", "subcategory": "Meble > Szafy", "rate": "1,45%", "rate_num": 0.0145}, {"category": "Filmy", "subcategory": "", "rate": "1,45%", "rate_num": 0.0145}, {"category": "Dom i ogród", "subcategory": "Meble > Komody", "rate": "1,44%", "rate_num": 0.0144}, {"category": "Ksiazki", "subcategory": "Podreczniki szkolne, edukacja > Podreczniki jezykowe", "rate": "1,44%", "rate_num": 0.0144}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Pokój dziecka", "rate": "1,43%", "rate_num": 0.0143}, {"category": "Dom i ogród", "subcategory": "", "rate": "1,43%", "rate_num": 0.0143}, {"category": "Dom i ogród", "subcategory": "Meble > Regaly", "rate": "1,41%", "rate_num": 0.0141}, {"category": "Filmy", "subcategory": "Filmy DVD > Fantasy/SF", "rate": "1,41%", "rate_num": 0.0141}, {"category": "Szkolne i papiernicze", "subcategory": "Artykuly szkolno-biurowe > plecaki i piórniki", "rate": "1,40%", "rate_num": 0.014}, {"category": "Sport", "subcategory": "Sporty zimowe > Kaski narciarskie", "rate": "1,40%", "rate_num": 0.014}, {"category": "Dom i ogród", "subcategory": "Wyposazenie kuchni i jadalni > Noze kuchenne", "rate": "1,39%", "rate_num": 0.0139}, {"category": "Dom i ogród", "subcategory": "Meble > Toaletki", "rate": "1,39%", "rate_num": 0.0139}, {"category": "Dom i ogród", "subcategory": "Ogród > Meble ogrodowe", "rate": "1,38%", "rate_num": 0.0138}, {"category": "Dom i ogród", "subcategory": "Dekoracje domu > Dekoracje swiateczne", "rate": "1,38%", "rate_num": 0.0138}, {"category": "Dom i ogród", "subcategory": "Dekoracje domu > Zegary", "rate": "1,38%", "rate_num": 0.0138}, {"category": "Dom i ogród", "subcategory": "Meble > Fotele", "rate": "1,37%", "rate_num": 0.0137}, {"category": "Dom i ogród", "subcategory": "Wyposazenie kuchni i jadalni > Naczynia do gotowania", "rate": "1,37%", "rate_num": 0.0137}, {"category": "Zabawki", "subcategory": "Pojazdy > Garaze, tory i akcesoria", "rate": "1,37%", "rate_num": 0.0137}, {"category": "Dom i ogród", "subcategory": "Oswietlenie > Oswietlenie dekoracyjne", "rate": "1,32%", "rate_num": 0.0132}, {"category": "Dom i ogród", "subcategory": "Meble > Lawy i stoliki kawowe", "rate": "1,31%", "rate_num": 0.0131}, {"category": "Dom i ogród", "subcategory": "Wyposazenie kuchni i jadalni > Zastawa stolowa", "rate": "1,30%", "rate_num": 0.013}, {"category": "Moda", "subcategory": "", "rate": "1,30%", "rate_num": 0.013}, {"category": "Sport", "subcategory": "Elektronika sportowa > Zegarki sportowe", "rate": "1,30%", "rate_num": 0.013}, {"category": "Sport", "subcategory": "Silownia i fitness > Akcesoria do cwiczen", "rate": "1,30%", "rate_num": 0.013}, {"category": "Motoryzacja", "subcategory": "Elektronika dla zmotoryzowanych", "rate": "1,30%", "rate_num": 0.013}, {"category": "Supermarket", "subcategory": "delikatesy > zestawy prezentowe > kosze prezentowe", "rate": "1,29%", "rate_num": 0.0129}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Kapiel dziecka", "rate": "1,29%", "rate_num": 0.0129}, {"category": "Dom i ogród", "subcategory": "Dekoracje domu > Plakaty", "rate": "1,27%", "rate_num": 0.0127}, {"category": "Dom i ogród", "subcategory": "Meble > Krzesla", "rate": "1,27%", "rate_num": 0.0127}, {"category": "Dziecko i mama", "subcategory": "Mama", "rate": "1,27%", "rate_num": 0.0127}, {"category": "AGD", "subcategory": "Male AGD > Urzadzenia medyczne", "rate": "1,27%", "rate_num": 0.0127}, {"category": "Zabawki", "subcategory": "Pluszaki > Maskotki", "rate": "1,26%", "rate_num": 0.0126}, {"category": "Zabawki", "subcategory": "Puzzle > Puzzle tradycyjne", "rate": "1,26%", "rate_num": 0.0126}, {"category": "Dom i ogród", "subcategory": "Wyposazenie kuchni i jadalni > Filtracja wody", "rate": "1,26%", "rate_num": 0.0126}, {"category": "Zabawki", "subcategory": "Sport i rekreacja > Rowerki dla dzieci", "rate": "1,26%", "rate_num": 0.0126}, {"category": "Sport", "subcategory": "Rowery i akcesoria > Akcesoria rowerowe", "rate": "1,25%", "rate_num": 0.0125}, {"category": "Sport", "subcategory": "Sporty druzynowe > Pilka nozna", "rate": "1,25%", "rate_num": 0.0125}, {"category": "Gry i programy", "subcategory": "Nintendo Switch", "rate": "1,24%", "rate_num": 0.0124}, {"category": "Zabawki", "subcategory": "Pojazdy > Modele kolekcjonerskie", "rate": "1,24%", "rate_num": 0.0124}, {"category": "Zabawki", "subcategory": "Pojazdy > Pojazdy zdalnie sterowane", "rate": "1,24%", "rate_num": 0.0124}, {"category": "Dom i ogród", "subcategory": "Artykuly dla zwierzat > Kot", "rate": "1,22%", "rate_num": 0.0122}, {"category": "Dom i ogród", "subcategory": "Meble > Przechowywanie ubran", "rate": "1,22%", "rate_num": 0.0122}, {"category": "Zabawki", "subcategory": "Nauka i rozwój > Pisanie i czytanie", "rate": "1,22%", "rate_num": 0.0122}, {"category": "Zabawki", "subcategory": "Klocki > Klocki plastikowe", "rate": "1,21%", "rate_num": 0.0121}, {"category": "Gry i programy", "subcategory": "Konsole inne", "rate": "1,20%", "rate_num": 0.012}, {"category": "Ksiazki", "subcategory": "Nauki spoleczne i humanistyczne > Pedagogika, dydaktyka", "rate": "1,20%", "rate_num": 0.012}, {"category": "Dom i ogród", "subcategory": "Artykuly dla zwierzat > Pies", "rate": "1,19%", "rate_num": 0.0119}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Akcesoria do laptopów", "rate": "1,19%", "rate_num": 0.0119}, {"category": "Motoryzacja", "subcategory": "", "rate": "1,17%", "rate_num": 0.0117}, {"category": "Dom i ogród", "subcategory": "Dekoracje domu > Swiece", "rate": "1,17%", "rate_num": 0.0117}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Spiworki", "rate": "1,16%", "rate_num": 0.0116}, {"category": "Motoryzacja", "subcategory": "Bezpieczenstwo na drodze", "rate": "1,16%", "rate_num": 0.0116}, {"category": "Zdrowie i uroda", "subcategory": "Makijaz > Akcesoria do makijazu", "rate": "1,15%", "rate_num": 0.0115}, {"category": "Gry i programy", "subcategory": "Xbox 360", "rate": "1,14%", "rate_num": 0.0114}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Bezpieczenstwo dziecka", "rate": "1,13%", "rate_num": 0.0113}, {"category": "Gry i programy", "subcategory": "PC", "rate": "1,13%", "rate_num": 0.0113}, {"category": "Gry i programy", "subcategory": "Playstation 5", "rate": "1,13%", "rate_num": 0.0113}, {"category": "Zabawki", "subcategory": "Gry > Karty i gry karciane", "rate": "1,13%", "rate_num": 0.0113}, {"category": "Zabawki", "subcategory": "Pojazdy > Samochody", "rate": "1,13%", "rate_num": 0.0113}, {"category": "Gry i programy", "subcategory": "Gadzety z gier", "rate": "1,12%", "rate_num": 0.0112}, {"category": "Zabawki", "subcategory": "Klocki > Klocki konstrukcyjne", "rate": "1,12%", "rate_num": 0.0112}, {"category": "Elektronika", "subcategory": "Sprzet fotograficzny > Akcesoria fotograficzne", "rate": "1,10%", "rate_num": 0.011}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Zestawy kosmetyków do pielegnacji", "rate": "1,10%", "rate_num": 0.011}, {"category": "Dom i ogród", "subcategory": "Wyposazenie lazienki > Akcesoria lazienkowe", "rate": "1,09%", "rate_num": 0.0109}, {"category": "Zabawki", "subcategory": "Zestawy kreatywne > Ozdabianie dla dzieci", "rate": "1,07%", "rate_num": 0.0107}, {"category": "Gry i programy", "subcategory": "Playstation 4", "rate": "1,06%", "rate_num": 0.0106}, {"category": "AGD", "subcategory": "Male AGD > Sprzet kuchenny", "rate": "1,06%", "rate_num": 0.0106}, {"category": "Dom i ogród", "subcategory": "Wyposazenie kuchni i jadalni > Armatura kuchenna", "rate": "1,05%", "rate_num": 0.0105}, {"category": "Sport", "subcategory": "Elektronika sportowa > Monitory aktywnosci", "rate": "1,04%", "rate_num": 0.0104}, {"category": "Zabawki", "subcategory": "Zabawki dla najmlodszych > Chodziki, jezdziki", "rate": "1,03%", "rate_num": 0.0103}, {"category": "Zdrowie i uroda", "subcategory": "Makijaz > Makijaz oczu", "rate": "1,03%", "rate_num": 0.0103}, {"category": "Ksiazki", "subcategory": "Podreczniki szkolne, edukacja > Liceum i technikum", "rate": "1,03%", "rate_num": 0.0103}, {"category": "Zabawki", "subcategory": "Zabawki dla najmlodszych > Maty i centra zabaw", "rate": "1,02%", "rate_num": 0.0102}, {"category": "Zabawki", "subcategory": "Zabawki ogrodowe > Domki i namioty", "rate": "1,01%", "rate_num": 0.0101}, {"category": "Dziecko i mama", "subcategory": "", "rate": "1,00%", "rate_num": 0.01}, {"category": "Dom i ogród", "subcategory": "Czystosc w domu > Akcesoria do prania i sprzatania", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Dom i ogród", "subcategory": "Warsztat i narzedzia > Wyposazenie i organizacja warsztatu", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Akcesoria do tabletów", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Zdrowie i uroda", "subcategory": "Perfumy > Damskie", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Gry i programy", "subcategory": "Playstation 3", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Motoryzacja", "subcategory": "Felgi, kolpaki i sruby kól", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Sport", "subcategory": "Odziez i obuwie sportowe > Odziez sportowa", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Zdrowie i uroda", "subcategory": "Perfumy > Meskie", "rate": "0,99%", "rate_num": 0.0099}, {"category": "Dom i ogród", "subcategory": "Monitoring i bezpieczenstwo > Systemy alarmowe", "rate": "0,98%", "rate_num": 0.0098}, {"category": "Elektronika", "subcategory": "Sprzet fotograficzny > Aparaty fotograficzne", "rate": "0,96%", "rate_num": 0.0096}, {"category": "Elektronika", "subcategory": "Drony i akcesoria", "rate": "0,96%", "rate_num": 0.0096}, {"category": "Sport", "subcategory": "Silownia i fitness > Sprzet fitness", "rate": "0,95%", "rate_num": 0.0095}, {"category": "AGD", "subcategory": "", "rate": "0,95%", "rate_num": 0.0095}, {"category": "Motoryzacja", "subcategory": "Akcesoria samochodowe", "rate": "0,94%", "rate_num": 0.0094}, {"category": "Motoryzacja", "subcategory": "Kosmetyki samochodowe", "rate": "0,94%", "rate_num": 0.0094}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Wózki dzieciece", "rate": "0,94%", "rate_num": 0.0094}, {"category": "Zdrowie i uroda", "subcategory": "", "rate": "0,94%", "rate_num": 0.0094}, {"category": "AGD", "subcategory": "Male AGD > Urzadzenia do pielegnacji", "rate": "0,93%", "rate_num": 0.0093}, {"category": "Dom i ogród", "subcategory": "Monitoring i bezpieczenstwo > Kamery i Atrapy kamer", "rate": "0,93%", "rate_num": 0.0093}, {"category": "Ksiazki", "subcategory": "Lektury, pomoce szkolne > Szkola srednia", "rate": "0,92%", "rate_num": 0.0092}, {"category": "Ksiazki", "subcategory": "Podreczniki szkolne, edukacja > Szkola podstawowa", "rate": "0,90%", "rate_num": 0.009}, {"category": "Zdrowie i uroda", "subcategory": "Zdrowie > Suplementy diety", "rate": "0,90%", "rate_num": 0.009}, {"category": "Sport", "subcategory": "Rolki, deskorolki, hulajnogi > Pojazdy elektryczne", "rate": "0,89%", "rate_num": 0.0089}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Foteliki samochodowe", "rate": "0,88%", "rate_num": 0.0088}, {"category": "AGD", "subcategory": "Akcesoria i czesci do sprzetu AGD", "rate": "0,87%", "rate_num": 0.0087}, {"category": "Dom i ogród", "subcategory": "Warsztat i narzedzia > Narzedzia pomiarowe", "rate": "0,87%", "rate_num": 0.0087}, {"category": "Filmy", "subcategory": "Filmy DVD > Bajki/Kino familijne", "rate": "0,87%", "rate_num": 0.0087}, {"category": "Supermarket", "subcategory": "", "rate": "0,87%", "rate_num": 0.0087}, {"category": "Zabawki", "subcategory": "Zabawki dla najmlodszych > Interaktywne i edukacyjne", "rate": "0,86%", "rate_num": 0.0086}, {"category": "Gry i programy", "subcategory": "", "rate": "0,85%", "rate_num": 0.0085}, {"category": "AGD", "subcategory": "Male AGD > Ekspresy i akcesoria do kawy", "rate": "0,84%", "rate_num": 0.0084}, {"category": "Motoryzacja", "subcategory": "Chemia motoryzacyjna", "rate": "0,84%", "rate_num": 0.0084}, {"category": "Zdrowie i uroda", "subcategory": "Dermokosmetyki > Dermokosmetyki do twarzy", "rate": "0,81%", "rate_num": 0.0081}, {"category": "Zdrowie i uroda", "subcategory": "Perfumy > Zestawy perfum", "rate": "0,81%", "rate_num": 0.0081}, {"category": "Sport", "subcategory": "Odziez i obuwie sportowe > Obuwie sportowe", "rate": "0,80%", "rate_num": 0.008}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Pielegnacja twarzy", "rate": "0,80%", "rate_num": 0.008}, {"category": "Elektronika", "subcategory": "Czytniki eBooków > Czytniki", "rate": "0,80%", "rate_num": 0.008}, {"category": "Elektronika", "subcategory": "Telefony i smartwatche > Akcesoria do telefonów i smartfonów", "rate": "0,79%", "rate_num": 0.0079}, {"category": "Motoryzacja", "subcategory": "Opony samochodowe", "rate": "0,78%", "rate_num": 0.0078}, {"category": "Zdrowie i uroda", "subcategory": "Makijaz > Makijaz twarzy", "rate": "0,78%", "rate_num": 0.0078}, {"category": "Zabawki", "subcategory": "Sport i rekreacja > Hulajnogi i sporty rolkowe", "rate": "0,77%", "rate_num": 0.0077}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Pielegnacja ciala", "rate": "0,76%", "rate_num": 0.0076}, {"category": "Motoryzacja", "subcategory": "Czesci samochodowe", "rate": "0,76%", "rate_num": 0.0076}, {"category": "Gry i programy", "subcategory": "Xbox One", "rate": "0,73%", "rate_num": 0.0073}, {"category": "Ksiazki", "subcategory": "Nauka jezyków > Jezyk polski dla obcokrajowców", "rate": "0,73%", "rate_num": 0.0073}, {"category": "Dom i ogród", "subcategory": "Warsztat i narzedzia > Narzedzia reczne", "rate": "0,72%", "rate_num": 0.0072}, {"category": "Gry i programy", "subcategory": "Sprzet Gamingowy", "rate": "0,72%", "rate_num": 0.0072}, {"category": "AGD", "subcategory": "Male AGD > Sprzatanie", "rate": "0,71%", "rate_num": 0.0071}, {"category": "Elektronika", "subcategory": "TV audio video > Sluchawki", "rate": "0,71%", "rate_num": 0.0071}, {"category": "Zabawki", "subcategory": "Zabawki ogrodowe > Wyrzutnie i pistolety", "rate": "0,70%", "rate_num": 0.007}, {"category": "Elektronika", "subcategory": "Sprzet optyczny", "rate": "0,69%", "rate_num": 0.0069}, {"category": "Sport", "subcategory": "Silownia i fitness > Odzywki i suplementy", "rate": "0,69%", "rate_num": 0.0069}, {"category": "Motoryzacja", "subcategory": "Bagazniki, boksy samochodowe", "rate": "0,68%", "rate_num": 0.0068}, {"category": "Dom i ogród", "subcategory": "Warsztat i narzedzia > Elektronarzedzia", "rate": "0,68%", "rate_num": 0.0068}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Akcesoria komputerowe", "rate": "0,68%", "rate_num": 0.0068}, {"category": "Elektronika", "subcategory": "TV audio video > Akcesoria audio i RTV", "rate": "0,67%", "rate_num": 0.0067}, {"category": "Elektronika", "subcategory": "TV audio video > Glosniki", "rate": "0,67%", "rate_num": 0.0067}, {"category": "Elektronika", "subcategory": "Telefony i smartwatche > Smartwatche", "rate": "0,64%", "rate_num": 0.0064}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Pielegnacja wlosów", "rate": "0,63%", "rate_num": 0.0063}, {"category": "eKarty prezentowe Empik", "subcategory": "", "rate": "0,63%", "rate_num": 0.0063}, {"category": "Ksiazki", "subcategory": "Lektury, pomoce szkolne > Szkola podstawowa", "rate": "0,60%", "rate_num": 0.006}, {"category": "Sport", "subcategory": "Rowery i akcesoria > Rowery", "rate": "0,60%", "rate_num": 0.006}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Stylizacja wlosów", "rate": "0,60%", "rate_num": 0.006}, {"category": "AGD", "subcategory": "Male AGD > Prasowanie i pielegnacja ubran", "rate": "0,58%", "rate_num": 0.0058}, {"category": "AGD", "subcategory": "Male AGD > Oczyszczanie i nawilzanie powietrza", "rate": "0,58%", "rate_num": 0.0058}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Zywnosc i karmienie dziecka", "rate": "0,57%", "rate_num": 0.0057}, {"category": "Elektronika", "subcategory": "Instrumenty muzyczne", "rate": "0,57%", "rate_num": 0.0057}, {"category": "Gry i programy", "subcategory": "Xbox Series X i S", "rate": "0,56%", "rate_num": 0.0056}, {"category": "Supermarket", "subcategory": "Srodki czystosci", "rate": "0,55%", "rate_num": 0.0055}, {"category": "AGD", "subcategory": "AGD wolnostojace", "rate": "0,52%", "rate_num": 0.0052}, {"category": "Elektronika", "subcategory": "", "rate": "0,52%", "rate_num": 0.0052}, {"category": "Supermarket", "subcategory": "delikatesy > kawa > kawa ziarnista", "rate": "0,52%", "rate_num": 0.0052}, {"category": "Elektronika", "subcategory": "Telefony i smartwatche > Smartfony", "rate": "0,51%", "rate_num": 0.0051}, {"category": "Dziecko i mama", "subcategory": "Dziecko > Pieluchy i akcesoria", "rate": "0,49%", "rate_num": 0.0049}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Koloryzacja wlosów", "rate": "0,47%", "rate_num": 0.0047}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Tablety multimedialne", "rate": "0,47%", "rate_num": 0.0047}, {"category": "Elektronika", "subcategory": "TV audio video > HiFi", "rate": "0,45%", "rate_num": 0.0045}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Urzadzenia sieciowe", "rate": "0,42%", "rate_num": 0.0042}, {"category": "Zabawki", "subcategory": "Zestawy kreatywne > Masy plastyczne", "rate": "0,40%", "rate_num": 0.004}, {"category": "AGD", "subcategory": "AGD do zabudowy > Piekarniki do zabudowy", "rate": "0,38%", "rate_num": 0.0038}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Podzespoly komputerowe", "rate": "0,38%", "rate_num": 0.0038}, {"category": "Wszystkie inne karty podarunkowe", "subcategory": "", "rate": "0,38%", "rate_num": 0.0038}, {"category": "Pozostałe", "subcategory": "", "rate": "0,38%", "rate_num": 0.0038}, {"category": "Elektronika", "subcategory": "Drukarki i sprzet biurowy > Urzadzenia wielofunkcyjne", "rate": "0,37%", "rate_num": 0.0037}, {"category": "Gry i programy", "subcategory": "Produkty i doładowania cyfrowe", "rate": "0,36%", "rate_num": 0.0036}, {"category": "Elektronika", "subcategory": "TV audio video > Telewizory", "rate": "0,36%", "rate_num": 0.0036}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Nosniki danych", "rate": "0,31%", "rate_num": 0.0031}, {"category": "Elektronika", "subcategory": "Komputery i laptopy > Laptopy", "rate": "0,26%", "rate_num": 0.0026}, {"category": "Elektronika", "subcategory": "TV audio video > Projektory i ekrany", "rate": "0,26%", "rate_num": 0.0026}, {"category": "Zdrowie i uroda", "subcategory": "Kosmetyki i pielegnacja > Golenie i depilacja", "rate": "0,13%", "rate_num": 0.0013}, {"category": "Abonamenty", "subcategory": "", "rate": "0%", "rate_num": 0.0}, {"category": "Abonamenty", "subcategory": "Empik GO", "rate": "0%", "rate_num": 0.0}, {"category": "Abonamenty", "subcategory": "Empik Music", "rate": "0%", "rate_num": 0.0}, {"category": "Abonamenty", "subcategory": "Premium Koszyk", "rate": "0%", "rate_num": 0.0}, {"category": "Abonamenty", "subcategory": "Premium LP", "rate": "0%", "rate_num": 0.0}];
+
+const T = {
+  pl: {
+    title: 'Stawki cashbacku LetyShops za zamówienia w Empik',
+    search: 'Szukaj kategorii...',
+    thCat: 'Kategoria',
+    thSub: 'Podkategoria',
+    thRate: 'Stawka cashback',
+    noResults: 'Brak wyników dla podanej frazy.',
+    showing: 'Pokazuje',
+    of: 'z',
+    records: 'rekordów',
+    note: 'To są stawki podstawowe. Przy aktywacji gorącego cashbacku procent zwrotu rośnie zgodnie z mnożnikiem.'
+  },
+  en: {
+    title: 'LetyShops cashback rates for Empik orders',
+    search: 'Search category...',
+    thCat: 'Category',
+    thSub: 'Subcategory',
+    thRate: 'Cashback rate',
+    noResults: 'No results found.',
+    showing: 'Showing',
+    of: 'of',
+    records: 'records',
+    note: 'These are base rates. When hot cashback is activated, the cashback percentage will be increased according to the multiplier.'
+  }
+};
+
+let lang = 'pl';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('page-title').textContent = T[l].title;
+  document.getElementById('search').placeholder = T[l].search;
+  document.getElementById('th-cat').textContent = T[l].thCat;
+  document.getElementById('th-sub').textContent = T[l].thSub;
+  document.getElementById('th-rate').textContent = T[l].thRate;
+  document.getElementById('no-results').textContent = T[l].noResults;
+  document.getElementById('note').textContent = T[l].note;
+  document.getElementById('note').textContent = T[lang].note;
+renderTable();
+}
+
+function renderTable() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const tbody = document.getElementById('tbody');
+  const noResults = document.getElementById('no-results');
+  // stats removed
+
+  const filtered = DATA.filter(r =>
+    r.category.toLowerCase().includes(q) ||
+    r.subcategory.toLowerCase().includes(q) ||
+    r.rate.toLowerCase().includes(q)
+  );
+
+  tbody.innerHTML = '';
+
+  if (filtered.length === 0) {
+    noResults.style.display = 'block';
+    // stats removed
+  } else {
+    noResults.style.display = 'none';
+    const t = T[lang];
+    // stats removed
+    filtered.forEach(r => {
+      const tr = document.createElement('tr');
+      const isZero = r.rate_num === 0;
+      tr.innerHTML = `
+        <td><span class="cat-label">${r.category}</span></td>
+        <td class="sub-text">${r.subcategory || '—'}</td>
+        <td><span class="rate-badge ${isZero ? 'zero' : ''}">${r.rate}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+}
+
+document.getElementById('note').textContent = T[lang].note;
+renderTable();
+</script>
+</body>
+</html>
